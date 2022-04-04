@@ -1,0 +1,21 @@
+ <th>商品名</th>
+ <th>税抜価格</th> 
+ <th>ジャンル</th> 
+ <th>ステータス</th>
+ 
+<% @items.each do |item| %><br/> 
+ 
+ <%= item.id %>
+ 
+ <%= link_to item.name,public_item_path(item.id) %>
+ 
+ <%= item.price.to_s(:delimited, delimiter: ',') %>
+ 
+ <%= item.genre.name %>
+ 
+ <% if item.is_active == true %>
+  販売中
+ <% else %> 
+  販売停止中
+ <% end %>
+<% end %>

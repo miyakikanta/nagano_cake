@@ -1,0 +1,43 @@
+<header>
+          <% if customer_signed_in? %>
+          <!--顧客がログインしている時 --> 
+  
+          <%= link_to "マイページ", customers_show_path %>
+          <%= link_to "商品一覧", items_path %>
+          <%= link_to "カート", customers_cart_items_path %>
+          <%= link_to "About", about_path %>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+
+        <% elsif admin_signed_in? %> 
+          <!-- 管理者がログインしている時 -->
+  
+          <%= link_to "商品一覧", admins_items_path %>
+          <%= link_to "会員一覧", admins_customers_path %>
+          <%= link_to "注文履歴一覧", admins_orders_path %>
+          <%= link_to "ジャンル一覧", admins_genres_path %>
+          <%= link_to "About", about_path  %>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+
+        <% else %>
+
+          <!-- ログインしていない時 -->
+          <%= link_to "商品一覧", items_path %>
+          <%= link_to "新規登録", new_customer_registration_path %>
+          <%= link_to "About", about_path %>
+          <%= link_to "ログイン", new_customer_session_path %>
+        <% end %> 
+</header>
+
+<footer>
+  
+</footer>
+
+
+validates :last_name 
+  validates :first_name
+  validates :last_name_kana
+  validates :first_name_kana
+  validates :postal_code
+  validates :address
+  validates :telephone_number
+  validates :is_deleted, inclusion: { in: [true,false] }

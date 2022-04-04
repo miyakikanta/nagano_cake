@@ -1,0 +1,39 @@
+<h2>ショッピングカート</h2>
+
+<%= link_to "カートを空にする",public_cart_items_destroy_all_path(@cart_items), method: :delete %><br>
+
+
+<th>商品名</th>
+<th>単価(税込)</th>
+<th>数量</th> 
+<th>小計</th>
+
+<% @totalprice = 0 %>
+
+<% @cart_items.each do |cart_item| %><br/> 
+
+ <%= cart_item.item.name %>
+ 
+ <%= cart_item.item.with_tax_price.to_s(:delimited, delimiter: ',') %>
+ 
+ <%= form_for cart_item, url: public_cart_item_path(cart_item) do |f| %>
+
+ <%= cart_item.amount %> 
+ <%= f.select :amount, *[1..100] %>
+ <%= f.submit "変更" , class: "btn btn-primary" %>
+<% end %>
+<%= cart_item.subtotal.to_s(:delimited, delimiter: ',') %>
+
+<% @totalprice += cart_item.subtotal %>
+
+<%= link_to "削除する",public_cart_item_path(cart_item), method: :delete %>
+  
+<% end %><br>
+
+
+<%= link_to "お買い物を続ける",public_items_path %>
+
+
+<th>合計</th>
+<%= @totalprice.to_s(:delimited, delimiter: ',') %>
+ 
