@@ -11,12 +11,14 @@ before_action :authenticate_customer!,only: [:show,:edit,:update,:unsubscribe,:w
 
   def update
     
-  customer = Customer.find(params[:id])
-  customer.update(customer_params) 
+  @customer = Customer.find(params[:id])
+  if @customer.update(customer_params) 
   redirect_to public_customer_path(current_customer)
- 
+  else
+  render :edit
   end
-
+  end
+  
   def unsubscribe
     @customer = current_customer
   end

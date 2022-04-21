@@ -1,4 +1,7 @@
 class Admin::HomesController < ApplicationController
-  def top
-  end
+  before_action :authenticate_admin!
+
+  def top 
+    @orders = Order.all
+  end 
 end

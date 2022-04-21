@@ -1,17 +1,30 @@
-<h2><%= @customer.last_name + "" + @customer.first_name %>さんの会員情報編集</h2>
+ <div class="container">
+  <div class="row">
+   <div class="col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
 
- <h4>会員ID</h4>
- <%= @customer.id %>
+<h2><%= @customer.full_name  %>さんの会員情報編集</h2>
+ 
+<% if @customer.errors.any? %>
+  <%= @customer.errors.count %>件のエラーが発生しました
+  <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %> 
+  </ul>
+<% end %>
+
+ <label for="id">会員ID</label>
+ <%= @customer.id %> 
 
 <%= form_with model: @customer, url: admin_customer_path do |f| %>
 
- <label>名前</label>
-<th>(姓)</th> <%= f.text_field :last_name,autoforcus: true,  placeholder: "(令和)" %>
-<th>(姓)</th> <%= f.text_field :first_name,autofocus: true, placeholder: "(道子)" %></br>
+ <label>名前</label><br>
+<th>(姓)</th><%= f.text_field :last_name,autoforcus: true,  placeholder: "令和" %>
+<th>(姓)</th><%= f.text_field :first_name,autofocus: true, placeholder: "道子" %></br>
 
-<label>フリガナ</label>
-<th>(セイ)</th> <%= f.text_field :last_name_kana,autofocus: true, placeholder: "(レイワ)" %>
-<th>(メイ)</th> <%= f.text_field :first_name_kana,autofocus: true, placeholder: "(ミチコ)" %>
+<label>カナ</label><br> 
+<th>(セイ)</th><%= f.text_field :last_name_kana,autofocus: true, placeholder: "レイワ" %>
+<th>(メイ)</th><%= f.text_field :first_name_kana,autofocus: true, placeholder: "ミチコ" %><br> 
 
   <div class="field"> 
     <%= f.label :メールアドレス %>
@@ -41,5 +54,9 @@
     <%= f.submit "変更を保存"  %>
   </div>
 <% end %>
+
+  </div>
+ </div>
+</div>
 
  

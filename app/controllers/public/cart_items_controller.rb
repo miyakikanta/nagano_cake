@@ -10,7 +10,7 @@ class Public::CartItemsController < ApplicationController
       new_amount = cart_item.amount + @cart_item.amount
       cart_item.update_attribute(:amount, new_amount)
       @cart_item.delete
-    end 
+    end
   end 
   @cart_item.save
   redirect_to public_cart_items_path

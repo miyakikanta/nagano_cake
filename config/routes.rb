@@ -17,7 +17,6 @@ devise_for :customers,skip: [:passwords], controllers: {
 
   namespace :public do
     root to: "homes#top"
-    
     post 'orders/comfirm'
     get 'orders/complete'
     get 'customers/unsubscribe'
@@ -27,9 +26,9 @@ devise_for :customers,skip: [:passwords], controllers: {
     resources :items,only:[:index,:show]
     resources :customers,only:[:show,:edit,:update]
     resources :cart_items,only:[:index,:update,:destroy,:create]
-    resources :orders,only:[:new,:create,:index,:show]
     resources :addresses,only:[:index,:edit,:create,:update,:destroy]
-
+    resources :orders,only:[:new,:create,:index,:show] 
+ 
   end
 
 # 管理者用

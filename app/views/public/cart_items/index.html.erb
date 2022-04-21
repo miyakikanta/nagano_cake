@@ -1,39 +1,61 @@
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+
 <h2>ショッピングカート</h2>
+<% if @cart_items.any? %>
 
-<%= link_to "カートを空にする",public_cart_items_destroy_all_path(@cart_items), method: :delete %><br>
 
+  <table class="table">
+  <tr>
+   <th>商品名</th>
+   <th>単価(税込)</th>
+   <th>数量</th>
+   <th>小計</th>
+   <th></th>
+  </tr>
+ <% @totalprice = 0 %>
 
-<th>商品名</th>
-<th>単価(税込)</th>
-<th>数量</th> 
-<th>小計</th>
+ <% @cart_items.each do |cart_item| %><br/>
+ <tr>
+ <th><%= cart_item.item.name %></th>
 
-<% @totalprice = 0 %>
+ <th><%= cart_item.item.with_tax_price.to_s(:delimited, delimiter: ',') %></th>
 
-<% @cart_items.each do |cart_item| %><br/> 
-
- <%= cart_item.item.name %>
- 
- <%= cart_item.item.with_tax_price.to_s(:delimited, delimiter: ',') %>
- 
  <%= form_for cart_item, url: public_cart_item_path(cart_item) do |f| %>
 
- <%= cart_item.amount %> 
- <%= f.select :amount, *[1..100] %>
- <%= f.submit "変更" , class: "btn btn-primary" %>
+ <% cart_item.amount %>
+ <th><%= f.select :amount, *[1..100] %>
+ <%= f.submit "変更" , class: "btn btn-primary" %></th>
+ <% end %>
+ <th><%= cart_item.subtotal.to_s(:delimited, delimiter: ',') %></th>
+
+ <% @totalprice += cart_item.subtotal %>
+
+
+  <th><%= link_to "削除する",public_cart_item_path(cart_item), method: :delete , class: 'btn btn-danger' %></th>
+  </tr>
+
+ <% end %><br>
+ </table>
+
+ <%= link_to "カートを空にする",public_cart_items_destroy_all_path(@cart_items), method: :delete,class: 'btn btn-danger' %><br>
+
+
+ <h4 class="text_right">合計金額</h3>
+ <h3><%= @totalprice.to_s(:delimited, delimiter: ',') %><br></h3>
+
+ <%= link_to "お買い物を続ける",public_items_path,class: 'btn btn-primary' %>
+ <%= link_to "情報入力に進む",new_public_order_path,class: 'btn btn-success' %>
+
+<% else %>
+ <div>現在カートに商品がありません</div>
+ <%= link_to "お買い物を続ける",public_items_path %>
 <% end %>
-<%= cart_item.subtotal.to_s(:delimited, delimiter: ',') %>
+  </div>
+ </div>
+</div>
 
-<% @totalprice += cart_item.subtotal %>
-
-<%= link_to "削除する",public_cart_item_path(cart_item), method: :delete %>
-  
-<% end %><br>
-
-
-<%= link_to "お買い物を続ける",public_items_path %>
-
-
-<th>合計</th>
-<%= @totalprice.to_s(:delimited, delimiter: ',') %>
- 
+  </div>
+ </div> 
+</div>

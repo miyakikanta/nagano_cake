@@ -1,3 +1,7 @@
+<div class="container">
+ <div class="row">
+  <div class="mx-auto">
+
 <h2>商品詳細</h2>
 
 <% if @item.image.attached? %>
@@ -6,21 +10,17 @@
 <%= image_tag'no_image',size: "250x150" %>
 <% end %>
 
-<h4>商品名</h4>
-<%= @item.name %>
+<h4><%= @item.name %></h4><br>
+ 
 
+<p><%= @item.introduction %><br></p> 
+ 
 
-<h4>商品説明</h4>
-<%= @item.introduction %>
-
-
-<h4>税込価格</h4>
-¥<%= @item.with_tax_price.to_s(:delimited, delimiter: ',') %>(税込)
-<h4>販売ステータス</h4>
+<h4>¥<%= @item.with_tax_price.to_s(:delimited, delimiter: ',') %>(税込)</h4>
 <% if @item.is_active == true %>
-販売中
+販売中 
 <% else %>
-販売停止中
+販売停止中 
 <% end %>
 
 
@@ -28,9 +28,14 @@
   <% if customer_signed_in? %>
     <%= f.hidden_field :customer_id, :value => current_customer.id %>
   <% end %>
+  
      <%= f.hidden_field :item_id, :value => @item.id %>
 
 　　<%= f.select :amount, *[1..100] %>
     <%= f.submit "カートに入れる", class: "btn btn-primary" %>
  <% end %>
 
+
+  </div>
+ </div> 
+</div>

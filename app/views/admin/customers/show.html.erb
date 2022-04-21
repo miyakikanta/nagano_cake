@@ -1,32 +1,41 @@
+ <div class="container">
+  <div class="row">
+   <div class="col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+ 
  <h2><%= @customer.last_name + "" + @customer.first_name %>さんの会員詳細</h2> 
  
- <h4>会員ID</h4>
- <%= @customer.id %>
+  <label for="id">会員ID</label> 
+  <%= @customer.id %><br> 
  
- <h4>氏名</h4>
-<%= @customer.last_name + "" + @customer.first_name %>
+  <label for="name">氏名</label> 
+　<%= @customer.last_name + "" + @customer.first_name %><br>
 
- <h4>フリガナ</h4>
- <%= @customer.last_name_kana + "" + @customer.first_name_kana %>
+  <label for="kana">フリガナ</label> 
+  <%= @customer.last_name_kana + "" + @customer.first_name_kana %><br>
 
-<h4>郵便番号</h4>
-<%= @customer.postal_code %>
+  <label for="postal">郵便番号</label>
+  <%= @customer.postal_code %><br>
 
-<h4>住所</h4>
-<%= @customer.address %>
+  <label for="address">住所</label> 
+  <%= @customer.address %><br>
 
-<h4>電話番号</h4>
-<%= @customer.telephone_number %>
+  <label for="telephone_number">電話番号</label>
+  <%= @customer.telephone_number %><br>
 
-<h4>メールアドレス</h4>
-<%= @customer.email %>
+  <label for="email">メールアドレス</label> 
+  <%= @customer.email %><br>
 
-<h4>会員ステータス</h4>
+<label for="is_deleted">会員ステータス</label> 
 <% if @customer.is_deleted == false %> 
   有効
- <% else %>
+ <% else %> 
   退会 
  <% end %></br>
  
- <%= link_to "編集する", edit_admin_customer_path(@customer) %>
- <%= link_to "注文履歴一覧を見る", admin_root_path %>
+ <%= link_to "編集する", edit_admin_customer_path(@customer), class: 'btn btn-success' %>
+ <%= link_to "注文履歴一覧を見る", admin_root_path ,class: 'btn btn-primary' %>
+  
+  </div>
+ </div>
+</div> 

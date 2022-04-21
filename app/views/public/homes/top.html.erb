@@ -1,2 +1,30 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+ <div class="container">
+  <div class="row">
+   <div class="mx-auto"> 
+
+<h1>新着商品</h1> 
+<table class="table">
+<tr>
+  <th></th>
+  <th>商品名</th>
+</tr>
+ 
+
+<% @items.each do |item| %>
+
+  <tr>
+ <th><% if item.image.attached? %>
+ <%= image_tag item.image ,size: "250x150" %>
+ <% else %>
+ <%= image_tag'no_image',size: "250x150" %>
+ <% end %></th>
+  <th><%= link_to item.name,public_item_path(item.id) %></th>
+  </tr>
+   
+<% end %><br>
+<%= link_to '全ての商品を見る', public_items_path %>
+
+ </table> 
+   </div>  
+  </div>
+ </div>

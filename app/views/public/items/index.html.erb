@@ -1,21 +1,45 @@
+<div class="container">
+ <div class="row">
+  <div class="mx-auto">
+ 
+ <h2>商品一覧</h2> 
+ 
+ <table class="table">
+ <tr></tr>
+ <th></th>
  <th>商品名</th>
  <th>税抜価格</th> 
  <th>ジャンル</th> 
  <th>ステータス</th>
+ <tr></tr>
  
 <% @items.each do |item| %><br/> 
+ <tr>
+   
+  <th><% if item.image.attached? %>
+  
+  <%= link_to public_item_path(item.id)  do %>
+  <%= image_tag item.image ,size: "250x150" %> 
+  <% end %> 
+  
+  <% else %>
+  <%= image_tag'no_image',size: "250x150" %>
+  <% end %></th>
+
+  <th><%= link_to item.name,public_item_path(item.id) %></th>
  
- <%= item.id %>
+  <th>￥<%= item.price.to_s(:delimited, delimiter: ',') %></th>
+  
+  <th><%= item.genre.name %></th>
  
- <%= link_to item.name,public_item_path(item.id) %>
- 
- <%= item.price.to_s(:delimited, delimiter: ',') %>
- 
- <%= item.genre.name %>
- 
- <% if item.is_active == true %>
-  販売中
- <% else %> 
-  販売停止中
- <% end %>
+  <th><% if item.is_active == true %> 
+        販売中
+      <% else %> 
+        販売停止中
+       <% end %></th>
 <% end %>
+ </tr>
+   </table>
+   </div>
+  </div>
+ </div>

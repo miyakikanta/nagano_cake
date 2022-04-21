@@ -1,33 +1,43 @@
+<div class="container">
+ <div class="row">
+  <div class="mx-auto">
 <h2>マイページ</h2>
+ <th class='lead'>登録情報編集</th> 
+ <%= link_to "編集する", edit_public_customer_path(@customer),class: 'btn btn-success'%><br>
 
- <%= link_to "編集する", edit_public_customer_path(@customer) %>
+<th>氏名</th> 
+<%= @customer.last_name + "" + @customer.first_name %><br>
 
-  <h4>氏名</h4>
-<%= @customer.last_name + "" + @customer.first_name %>
+ <th>フリガナ</th>
+ <%= @customer.last_name_kana + "" + @customer.first_name_kana %><br>
 
- <h4>フリガナ</h4>
- <%= @customer.last_name_kana + "" + @customer.first_name_kana %>
+<th>郵便番号</th> 
+<%= @customer.postal_code %><br>
 
-<h4>郵便番号</h4>
-<%= @customer.postal_code %>
+<th>住所</th>
+<%= @customer.address %><br>
 
-<h4>住所</h4>
-<%= @customer.address %>
+<th>電話番号</th>
+<%= @customer.telephone_number %><br>
 
-<h4>電話番号</h4>
-<%= @customer.telephone_number %>
+<th>メールアドレス</th>
+<%= @customer.email %><br>
 
-<h4>メールアドレス</h4>
-<%= @customer.email %>
-
-<h4>会員ステータス</h4>
-<% if @customer.is_deleted == false %> 
+<th>会員ステータス</th>
+<% if @customer.is_deleted == false %>
   有効
  <% else %>
   退会 
  <% end %></br>
  
- 
+  
  <th>配送先</th>
- <%= link_to "一覧を見る",public_addresses_path %>
+ <%= link_to "一覧を見る",public_addresses_path,class: 'btn btn-primary' %><br>
+ <p></p>
+ <th>注文履歴</th>
+ <%= link_to "一覧を見る",public_orders_path,class: 'btn btn-primary' %> 
+   </div>
+  </div> 
+ </div>
+
 

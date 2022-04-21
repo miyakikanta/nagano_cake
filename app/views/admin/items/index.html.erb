@@ -1,24 +1,37 @@
-<h2>商品一覧</h2>
-<%= button_to "＋", {controller: 'items', action: 'new'}, {method: :get} %>
- <th>商品ID</th> 
+<div class="container">
+  <div class="row">
+    <div class="mx-auto">
+ 
+<h3>商品一覧</h2>
+ <%= button_to "＋", {controller: 'items', action: 'new'}, {method: :get} %>
+  
+<table class="table table-striped bg-light">
+<tr> 
+ <th>商品ID</th>
  <th>商品名</th>
  <th>税抜価格</th> 
  <th>ジャンル</th> 
  <th>ステータス</th>
- 
+</tr>
 <% @items.each do |item| %><br/> 
+ <tr>
+  <th><%= item.id %></th>
+  
+  <th><%= link_to item.name,admin_item_path(item.id) %></th>
+  
+  <th><%= item.price.to_s(:delimited, delimiter: ',') %></th>
  
- <%= item.id %>
+  <th><%= item.genre.name %></th>
  
- <%= link_to item.name,admin_item_path(item.id) %>
- 
- <%= item.price.to_s(:delimited, delimiter: ',') %>
- 
- <%= item.genre.name %>
- 
- <% if item.is_active == true %>
-  販売中
- <% else %> 
-  販売停止中
- <% end %>
+  <th><% if item.is_active == true %> 
+         販売中
+       <% else %>
+         販売停止中
+       <% end %><th> 
+ </tr>
 <% end %>
+</table> 
+
+   </div>
+  </div>
+</div>
